@@ -235,6 +235,7 @@ class DatasatkerController extends Controller
         $getmedia = DB::table('mediapartner')->get();
         //dd($getmedia);
         if ($roles == 'humas_kanwil') {
+            //echo "humas kanwil broy"; die;
             return view('beritasatker.index_kanwil', compact('getmedia', 'satker', 'berita_satker', 'dtsatker'));
         } else if ($roles == 'humas_satker') {
             //return "prety";
@@ -526,6 +527,7 @@ class DatasatkerController extends Controller
 
     public function pilihkonfigurasi_kanwil(Request $request)
     {
+        //return "prit";
         //return $request->kode_satker_value;
         $querysatker = $query = Satker::query();
         $querysatker->select('*');

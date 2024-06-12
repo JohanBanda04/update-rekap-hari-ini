@@ -58,8 +58,7 @@
                                     </a>
                                 </div>
                                 <div class="col-3" style="margin-left: -80px">
-                                    {{--PILIHAN KONFIGURASI--}}
-                                    <a href="#" class="tampilkanlaporan_whatssap_message_today_kanwil btn btn-warning"
+                                    <a href="#" class="tampilkanlaporan_whatssap_message_today btn btn-warning"
                                        kode_satker_value="{{ $satker->kode_satker }}" id="btnTambahBeritaSatker">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                              height="24" viewBox="0 0 24 24" fill="none"
@@ -72,11 +71,11 @@
                                         </svg>
                                         {{--ASLIII--}}
                                         @php
-                                            $humas_kanwil = explode('_',$satker->roles);
+                                            $humas_satker = explode('_',$satker->roles);
                                         @endphp
-                                        {{--Proses Generate--}}
+                                        {{--Proses Generate Berita--}}
                                         Rekap Berita Hari Ini
-                                        ({{ ucfirst($humas_kanwil[0])." ".ucfirst($humas_kanwil[1]) }})
+                                        ({{ ucfirst($humas_satker[0])." ".ucfirst($humas_satker[1]) }})
                                     </a>
                                 </div>
                             </div>
@@ -331,9 +330,10 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body " style="">
-                    <form action="{{  route('storeberita') }}" method="post" id="frmBeritaSatker" name="frmBeritaSatker"
+                    <form action="{{ route('storeberita') }}" method="post" id="frmBeritaSatker" name="frmBeritaSatker"
                           enctype="multipart/form-data">
                         @csrf
+
                         <div class="row">
                             <div class="col-12">
                                 <div class="input-icon mb-3">
@@ -373,7 +373,7 @@
                                 </span>
                                     <input type="text" value="" class="form-control" name="judul_berita_satker"
                                            id="judul_berita_satker"
-                                           placeholder="Tambah Judul Berita" {{--required--}}>
+                                           placeholder="Judul Berita">
                                 </div>
                             </div>
                         </div>
@@ -393,7 +393,7 @@
                                    </svg>
                                 </span>
                                     <input type="text" value="" class="form-control" name="facebook" id="facebook"
-                                           placeholder="Link Facebook" {{--required--}}>
+                                           placeholder="Link Facebook">
                                 </div>
                             </div>
                         </div>
@@ -413,7 +413,7 @@
                                    </svg>
                                 </span>
                                     <input type="text" value="" class="form-control" name="website" id="website"
-                                           placeholder="Link Website" {{--required--}}>
+                                           placeholder="Link Website">
                                 </div>
                             </div>
                         </div>
@@ -433,7 +433,7 @@
                                    </svg>
                                 </span>
                                     <input type="text" value="" class="form-control" name="instagram" id="instagram"
-                                           placeholder="Link Instagram" {{--required--}}>
+                                           placeholder="Link Instagram">
                                 </div>
                             </div>
                         </div>
@@ -453,7 +453,7 @@
                                    </svg>
                                 </span>
                                     <input type="text" value="" class="form-control" name="twitter" id="twitter"
-                                           placeholder="Link Twitter" {{--required--}}>
+                                           placeholder="Link Twitter">
                                 </div>
                             </div>
                         </div>
@@ -472,7 +472,7 @@
                                    </svg>
                                 </span>
                                     <input type="text" value="" class="form-control" name="tiktok" id="tiktok"
-                                           placeholder="Link Tiktok" {{--required--}}>
+                                           placeholder="Link Tiktok">
                                 </div>
                             </div>
                         </div>
@@ -491,7 +491,7 @@
                                    </svg>
                                 </span>
                                     <input type="text" value="" class="form-control" name="sippn" id="sippn"
-                                           placeholder="Link SIPPN" {{--required--}}>
+                                           placeholder="Link SIPPN">
                                 </div>
                             </div>
                         </div>
@@ -510,7 +510,7 @@
                                    </svg>
                                 </span>
                                     <input type="text" value="" class="form-control" name="youtube" id="youtube"
-                                           placeholder="Link Youtube" {{--required--}}>
+                                           placeholder="Link Youtube">
                                 </div>
                             </div>
                         </div>
@@ -530,12 +530,11 @@
                                             <tr class="">
 
                                                 <td class="" style="">
-                                                    {{--<label for="">Berita Media Lokal</label>--}}
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <select required name="kode_media[]" id="kode_media[]" class="form-select">
+                                                            <select required name="kode_media[]" id="kode_media[]"
+                                                                    class="form-select">
                                                                 <option value="">-Nama Media-</option>
-                                                                <option value="no media">-No Media-</option>
                                                                 @foreach($getmedia as $idx=>$media)
                                                                     <option value="{{ $media->kode_media }}">
                                                                         {{ $media->name }}
@@ -548,7 +547,6 @@
                                                                    class="jumlah_medlok form-control "
                                                                    placeholder="Judul Berita|||Link Media Lokal">
                                                         </div>
-
                                                     </div>
 
                                                 </td>
@@ -576,12 +574,11 @@
                                             <tr class="">
 
                                                 <td class="" style="">
-                                                    {{--<label for="">Berita Media Lokal</label>--}}
                                                     <div class="row">
                                                         <div class="col-4">
-                                                            <select required name="kode_media_nasional[]" id="kode_media_nasional[]" class="form-select">
+                                                            <select required name="kode_media_nasional[]"
+                                                                    id="kode_media_nasional[]" class="form-select">
                                                                 <option value="">-Nama Media-</option>
-                                                                <option value="no media">-No Media-</option>
                                                                 @foreach($getmedia as $idx=>$media)
                                                                     <option value="{{ $media->kode_media }}">
                                                                         {{ $media->name }}
@@ -591,10 +588,12 @@
                                                         </div>
                                                         <div class="col-8">
                                                             <input type="text" name="jumlah_nasional[]"
-                                                                   id="jumlah_nasional[]" class="jumlah_mednas form-control "
+                                                                   id="jumlah_nasional[]" class="form-control "
                                                                    placeholder="Judul Berita|||Link Media Nasional" required>
                                                         </div>
                                                     </div>
+                                                    {{--<label for="">Berita Media Lokal</label>--}}
+
                                                 </td>
                                             </tr>
                                         </table>
@@ -603,6 +602,53 @@
                                 </div>
                             </div>
                         </div>
+
+                        {{--<div class="row">
+                            <div class="col-12">
+                                <div class="form-group" style=" ">
+                                    <!--                        <label class="fw-500">Upload File SK / SP / Nodin / Undangan / Paparan / data pendukung lainnya</label>-->
+                                    <center><label class="col-lg-12 " style="">Link Tambahan (Media Lokal)</label>
+                                    </center>
+                                    <br>
+                                    <button class="btn btn-success m-l-15 col-lg-12" id="add-more" type="button"
+                                            style=" ">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Link
+                                    </button>
+                                    <small class="lh-1" style="color: red"><i></i></small>
+
+                                    <div id="auth-rows"></div>
+                                </div>
+                            </div>
+                        </div>--}}
+
+                        {{--<div class="row" style="margin-top: 10px;">
+                            <div class="col-12">
+                                <div class="form-group" style=" ">
+                                    <!--                        <label class="fw-500">Upload File SK / SP / Nodin / Undangan / Paparan / data pendukung lainnya</label>-->
+                                    <center><label class="col-lg-12 " style="">Link Tambahan (Media Nasional)</label>
+                                    </center>
+                                    <br>
+                                    <button class="btn btn-warning m-l-15 col-lg-12" id="add-more-nasional"
+                                            type="button"
+                                            style=" ">
+                                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Tambah Link
+                                    </button>
+                                    <small class="lh-1" style="color: red"><i></i></small>
+
+                                    <div id="auth-rows-nasional"></div>
+                                </div>
+                            </div>
+                        </div>--}}
+
+                        {{-- <div class="row mt-2">
+                             <div class="col-12">
+                                 <select name="role_satker" id="role_satker" class="form-select">
+                                     <option value="">-Pilih Roles-</option>
+                                     <option value="humas_satker">Humas Satker</option>
+                                     <option value="humas_kanwil">Humas Kanwil</option>
+                                 </select>
+                             </div>
+                         </div>--}}
 
                         <div class="row mt-2">
                             <div class="col-12">
@@ -649,15 +695,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">
-                        {{--ASLIII--}}
-                        @php
-                            $role = $satker->roles;
-                            $explode = explode('_',$role);
-                        @endphp
-                        Laporan Rekap Hari Ini
-                        <small>oleh {{ $satker->name }} ( {{ ucfirst($explode[0])." ".ucfirst($explode[1]) }} )</small>
-                    </h5>
+                    <h5 class="modal-title">Laporan Hari Ini {{ $satker->name }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="pilih_konfigurasi_body" name="pilih_konfigurasi_body">
@@ -687,7 +725,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit Data Beritae</h5>
+                    <h5 class="modal-title">Edit Data Berita</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" id="loadeditform_berita">
@@ -698,7 +736,9 @@
         </div>
     </div>
     <script type="text/javascript">
+        $(document).ready(function () {
 
+        });
     </script>
 @endsection
 
@@ -711,13 +751,14 @@
                 format: 'yyyy-mm-dd',
             });
 
-            $(".tampilkanlaporan_whatssap_message_today_kanwil").click(function () {
+            $(".tampilkanlaporan_whatssap_message_today").click(function () {
                 //alert("testing");
                 var kode_satker_value = $(this).attr('kode_satker_value');
                 //alert(kode_satker_value);
+                //return false;
                 $.ajax({
                     type: 'POST',
-                    url: '{{ route('pilihkonfigurasi_kanwil') }}',
+                    url: '{{ route('pilihkonfigurasi') }}',
                     cache: false,
                     data: {
                         _token: "{{ csrf_token() }}",
@@ -725,6 +766,7 @@
                     },
                     success: function (respond) {
                         console.log(respond);
+
                         $('#pilih_konfigurasi_body').html(respond);
                     },
                 });
@@ -796,8 +838,11 @@
 
 
                         '</td>' +
-                        '<td style=""><div class="row"><div class=col-4><select required name="kode_media[]" id="kode_media[]" class="form-select"><option value="">-Nama Media-</option><option value="no media">-No Media-</option>' +
-                        '@foreach($getmedia as $id=>$med)<option value="{{ $med->kode_media }}">{{ $med->name }}</option>@endforeach</select></div><div class="col-8"><input type="text" name="jumlah[]" id="jumlah[]" class="jumlah_medlok form-control" placeholder="Judul Berita|||Link Media Lokal"> </div></div>' +
+                        '<td style=""><div class="row"><div class="col-4">' +
+                        '<select required name="kode_media[]" id="kode_media[]" class="form-select">' +
+                        '<option value="">-Nama Media-</option>' +
+                        '@foreach($getmedia as $idx=>$media)<option value="{{ $media->kode_media }}">{{ $media->name }}</option>@endforeach' +
+                        '</select></div><div class="col-8"><input type="text" name="jumlah[]" id="jumlah[]" class="jumlah_medlok form-control"  placeholder="Judul Berita|||Link Media Lokal" ></div></div>' +
                         '</td>' +
                         '</tr>' +
                         '</table>' +
@@ -824,9 +869,13 @@
 
 
                         '</td>' +
-                        '<td style=""><div class="row"><div class="col-4"><select required name="kode_media_nasional[]" id="kode_media_nasional[]" class="form-select">' +
-                        '<option value="">-Nama Media-</option><option value="no media">-No Media-</option>@foreach($getmedia as $idk=>$mednas)<option value="{{ $mednas->kode_media }}">{{ $mednas->name }}</option>@endforeach</select></div><div class="col-8"><input type="text" name="jumlah_nasional[]" id="jumlah_nasional[]" class="jumlah_mednas form-control" placeholder="Judul Berita|||Link Media Nasional" required ></div></div> ' +
-
+                        '<td style=""><div class="row"><div class="col-4">'+
+                        '<select required name="kode_media_nasional[]" id="kode_media_nasional[]" class="form-select">'+
+                        '<option value="">-Nama Media-</option>'+
+                        '@foreach($getmedia as $idx=>$media)<option value="{{ $media->kode_media }}">{{ $media->name }}</option>@endforeach'+
+                        '</select></div>'+
+                        '<div class="col-8"><input type="text" name="jumlah_nasional[]" id="jumlah_nasional[]" class="form-control" placeholder="Judul Berita|||Link Media Nasional" required ></div>'+
+                        '</div> ' +
                         '</td>' +
                         '</tr>' +
                         '</table>' +
@@ -904,9 +953,8 @@
             $('.pilih_konfigurasi_berita').click(function () {
                 var id_berita = $(this).attr('id_berita');
                 var kode_satker = $(this).attr('kode_satker');
-                //console.log(kode_satker);
+                // console.log(kode_satker);
                 //alert(id_berita);
-                //return false;
 
                 $.ajax({
                     type: 'POST',
@@ -928,7 +976,6 @@
             $('.tampilkandetail').click(function () {
                 var id_berita = $(this).attr('id_berita');
                 //alert(id_berita);
-                //return false;
                 $.ajax({
                     type: 'POST',
                     url: '{{ route('tampilkandetailberita') }}',
@@ -947,7 +994,6 @@
             $('.editberita').click(function () {
                 var id_berita = $(this).attr('id_berita');
                 //alert(id_berita);
-                //return false;
                 $.ajax({
                     type: 'POST',
                     url: '{{ route('editberita') }}',
@@ -1004,9 +1050,9 @@
                 });
             });
 
-
             $('#frmBeritaSatker').submit(function () {
-
+                //alert('onsubmit');
+                //return false;
                 var kode_satker = $('#frmBeritaSatker').find('#kode_satker').val();
                 var judul_berita_satker = $('#frmBeritaSatker').find('#judul_berita_satker').val();
                 var facebook = $('#frmBeritaSatker').find('#facebook').val();
@@ -1117,10 +1163,6 @@
                     });
                     return false;
                 }
-
-                /*validasi link media lokal*/
-
-                //return false;
                 var jumlah_medlok = document.getElementsByClassName('jumlah_medlok');
                 for (var i = 0; i <= jumlah_medlok.length; i++) {
                     //alert(jumlah_medlok[i].value);
@@ -1136,33 +1178,8 @@
                         return false;
                     }
                 }
-                /*batas validasi link media lokal*/
-
-
             });
 
-            {{--function loadberita(){--}}
-            {{--var tanggal_awal = $('#tanggal_awal').val();--}}
-            {{--var kode_satker = $('#kode_satker').val();--}}
-            {{--//alert(kode_satker);--}}
-
-            {{--$.ajax({--}}
-            {{--type: 'POST',--}}
-            // url: '/datasatker/'+ kode_satker +'/getberitabytanggal',
-            {{--data: {--}}
-            {{--_token: "{{ csrf_token() }}",--}}
-            {{--tanggal_awal: tanggal_awal,--}}
-            {{--},--}}
-            {{--cache: false,--}}
-            {{--success: function(respond){--}}
-            {{--console.log(respond);--}}
-            {{--}--}}
-            {{--});--}}
-            {{--}--}}
-            {{--$('#tanggal_awal').change(function(e){--}}
-            {{--loadberita();--}}
-            {{--});--}}
-            {{--loadberita();--}}
         });
     </script>
 @endpush

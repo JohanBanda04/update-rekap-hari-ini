@@ -17,7 +17,7 @@
                                     </svg>
             </span>
                         <select name="id_konfig" id="id_konfig" class="id_konfig_satker form-control">
-                            <option value="">-Pilih Konfigurasi Laporan-</option>
+                            <option value="">-Pilih Konfigurasi Laporan -</option>
                             @foreach($datakonfig as $key=>$d)
                                 <option value="{{ $d->id_konfig }}">{{ $d->name_config }}
                                 </option>
